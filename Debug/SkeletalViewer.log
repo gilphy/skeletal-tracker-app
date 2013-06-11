@@ -1,0 +1,23 @@
+﻿Build started 4/18/2013 3:20:34 PM.
+     1>Project "C:\Users\Tracker\Desktop\TrackerAppSource\SkeletalViewer.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\SkeletalViewer.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+         All outputs are up-to-date.
+       ResourceCompile:
+         All outputs are up-to-date.
+       ManifestResourceCompile:
+         All outputs are up-to-date.
+       Link:
+         All outputs are up-to-date.
+       Manifest:
+         All outputs are up-to-date.
+       FinalizeBuildStatus:
+         Deleting file "Debug\SkeletalViewer.unsuccessfulbuild".
+         Touching "Debug\SkeletalViewer.lastbuildstate".
+     1>Done Building Project "C:\Users\Tracker\Desktop\TrackerAppSource\SkeletalViewer.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.09
