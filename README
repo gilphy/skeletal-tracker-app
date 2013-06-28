@@ -1,0 +1,77 @@
+To set up your application so it receives the datagram packets from TrackerApp:
+  -Enter the IPv4 address of your machine in one of the TargetIP fields.
+	-Next to that enter the port your application will be using to receive.
+	-Press Apply.
+
+To have TrackerApp automatically detect your application:
+	-Enter a port you want TrackerApp to listen on.
+	-Press Listen.
+	-Tell your application to attempt to establish a TCP connection with TrackerApp
+	 using the IPv4 address of the machine TrackerApp is running on and the port 
+	 that you entered previously.
+	-Unpress Listen.  Now the first TargetIP/port field has been overwritten with the 
+	 information corresponding to your application.
+	-Press Apply (just in case).
+
+To calibrate your Kinect for use with TrackerApp:
+	-Enter the (x, y, z) location of your Kinect sensor, where
+	 (0, 0, -1.5) meters is the center of your application's display and
+	 the x-y plane is parallel to your display.
+	-Enter the desired angle of your Kinect (with respect to a plane 
+	 orthogonal to gravity's vector). (This will tilt the sensor when 
+	 you press Apply.)
+	-Select whether you want entire skeletons to be tracked or just torsos.
+	-Select whether you want near or normal mode enabled.
+		Near mode clipping planes:
+			Near: .4 meters
+			Far:  3.0 meters
+		Regular mode clipping planes:
+			Near: 
+	-Press Apply
+
+The UDP packets consist of six floating point values (?endian?/?representation?) that 
+respectively represent:
+	-Left eye x-coord
+	-Left eye y-coord
+	-Left eye z-coord
+	-Right eye x-coord
+	-Right eye y-coord
+	-Right eye z-coord
+The same coordinate system used for calibration is used for this.
+
+Description of parameters (from the MSDN page):
+	-Smoothing:
+		-Smoothing parameter. Increasing the smoothing parameter value leads to more 
+		 highly-smoothed skeleton position values being returned.
+		-It is the nature of smoothing that, as the smoothing value is increased,
+		 responsiveness to the raw data decreases.
+		-Thus, increased smoothing leads to increased latency in the returned skeleton values.
+		-Values must be in the range 0 through 1.0. Passing 0 causes the raw data to be returned.
+	-Correction:
+		-Correction parameter. Lower values are slower to correct towards the raw data and appear smoother, while higher values will correct toward 			the raw data more quickly.
+		-Values must be in the range 0 through 1.0.
+	-Prediction
+		-The number of frames to predict into the future.
+		-Values must be greater than or equal to zero.
+		-Values greater than 0.5 will likely lead to overshooting when moving quickly. 
+		 This effect can be damped by using small values of fMaxDeviationRadius.
+	-JitterRadius
+		-The radius in meters for jitter reduction.
+		-Any jitter beyond this radius is clamped to the radius.
+	-MaxDeviationRadius
+		-The maximum radius in meters that filtered positions are allowed to deviate from raw data.
+		-Filtered values that would be more than this radius from the raw data are clamped 
+		 at this distance, in the direction of the filtered value.
+
+Currently the TrackedSkeletons combo box does nothing.  In the future it may be used
+to enable different modes of controlling whose skeletons are tracked.  Currently the active user
+(the one whose data is sent over the network) is defined to be whoever is closest to the Kinect.
+The secondary user is the one who is next-closest. This serves no purpose right now, but will matter
+when gestures are implemented. The active user is shown on the TrackerApp display in green and everyone 
+else is shown in red.
+
+To save the calibration/network settings, make sure everything has been applied correctly
+and then press Save.  This will write the settings to a file called kinectInfo.cfg.  To load 
+calibration/network settings, just press Load and everything will be applied automatically.
+
+To exit TrackerApp press Alt+F4.
